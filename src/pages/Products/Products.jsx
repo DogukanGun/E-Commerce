@@ -1,33 +1,22 @@
 import { useProducts } from "../../context/ProductContext";
 import { Link } from "react-router-dom";
 import { ProductCard } from "../../components";
+import { Col, Container,Row } from "react-bootstrap";
 function Products() {
   const { products } = useProducts();
   return (
-    <div>
-      <h1>Products</h1>
-      <ul
-        style={{
-          height: "100%",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          alignItems: "stretch",
-        }}
-      >
+    <Container>
+      <Row>
+        <Col className="mt-3 text-center" sm={12}>
+            <h1>Products</h1>
+        </Col> 
+        
+      
         {products.map((product) => (
+          <Col 
+          >
           <Link
             to={`/${product.id}`}
-            style={{
-              border: "1px solid black",
-              borderRadius: "5px",
-              width: "20vw",
-              paddingTop: "20px",
-              paddingBottom: "20px",
-              paddingLeft: "10px",
-              paddingRight: "10px",
-              margin: "20px",
-            }}
             key={product.id}
           >
             <ProductCard
@@ -38,9 +27,11 @@ function Products() {
               price={product.price}
             />
           </Link>
+          </Col>
         ))}
-      </ul>
-    </div>
+      
+      </Row>
+    </Container>
   );
 }
 

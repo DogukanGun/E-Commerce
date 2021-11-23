@@ -1,53 +1,33 @@
 import { Link } from "react-router-dom";
 import { useProducts } from "../../context/ProductContext";
 import { ProductCard } from "../../components";
+import { Col, Container,Row } from "react-bootstrap";
 function Basket() {
   const { basket } = useProducts();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <h1>Basket</h1>
-      <ul
-        style={{
-          height: "100%",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          alignItems: "stretch",
-        }}
-      >
+    <Container>
+        <Row className="mt-5">
+
+          <Col className="mt-3 text-center" sm={12}>
+            <h1>Basket</h1>
+          </Col>
+          
+      
         {basket.map((product) => (
-          <div key={product.id}>
-            <div
-              key={product.id}
-              style={{
-                border: "1px solid black",
-                borderRadius: "5px",
-                width: "20vw",
-                paddingTop: "20px",
-                paddingBottom: "20px",
-                paddingLeft: "10px",
-                paddingRight: "10px",
-                margin: "20px",
-              }}
-            >
+          <Col key={product.id} className="mt-3" sm={12}>
               <ProductCard
                 title={product.title}
                 src={product.image}
                 description={product.description}
                 price={product.price}
               />
-            </div>
-          </div>
-        ))}
-      </ul>
-    </div>
+          </Col>
+             
+              
+         ))}
+      </Row>
+    </Container>
   );
 }
 

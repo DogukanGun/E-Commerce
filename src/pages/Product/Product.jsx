@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useProducts } from "../../context/ProductContext";
 import { ProductCard } from "../../components";
+import { Col, Stack,Container, Row,Button } from "react-bootstrap";
 
 function Product() {
   const { id } = useParams();
@@ -15,6 +16,7 @@ function Product() {
     */
 
     selectedProduct.id !== item.id && setFavorites([...favorites, item]);
+    console.log(favorites);
 
     // products.filter((product) => product.id !== item.id) &&
     //   setFavorites([...favorites, item]);
@@ -27,42 +29,37 @@ function Product() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
+    <Container 
     >
+      <Row >
+      <Col className="col-md-3 text-center mx-auto">
       <h1>Product Page</h1>
       {selectedProduct.map((product) => (
-        <div
+        <Col 
           key={product.id}
-          style={{
-            border: "1px solid black",
-            borderRadius: "5px",
-            width: "20vw",
-            paddingTop: "20px",
-            paddingBottom: "20px",
-            paddingLeft: "10px",
-            paddingRight: "10px",
-            margin: "20px",
-          }}
-        >
-          <Link to="/">GO HOME</Link>
+        > 
+        
+        
           <ProductCard
             title={product.title}
             src={product.image}
             description={product.description}
+            category={product.category}
             price={product.price}
           />
-          <br />
-          <button onClick={() => addFav(product)}>Add Favorites</button>
+          <Stack className="mt-2 justify-content-md-center" direction="horizontal" gap={3}>
+            <Button variant="primary" onClick={() => addFav(product)}>Add Favorites</Button>
 
-          <button onClick={() => addBasket(product)}>Add Basket</button>
-        </div>
+            <Button variant="primary" onClick={() => addBasket(product)}>Add Basket</Button>
+          </Stack>
+      
+          
+        </Col>
+          
       ))}
-    </div>
+      </Col>
+      </Row>
+    </Container>
   );
 }
 
