@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useProducts } from "../../context/ProductContext";
 import { ProductCard } from "../../components";
-import { Col, Stack,Container, Row,Button } from "react-bootstrap";
+import { Col, Stack, Container, Row, Button } from "react-bootstrap";
 
 function Favorites() {
   const { products, favorites, basket, setBasket } = useProducts();
@@ -13,29 +13,35 @@ function Favorites() {
   };
 
   return (
-    <Container
-    > 
-        <Row className='text-center'>
-          
+    <Container style={{ minHeight: "100vh" }}>
+      <Row className="mt-5">
+        <Col className="mt-3 text-center" sm={12}>
           <h1>Favorites</h1>
-          
-        {favorites.map((product) => (
-        <Col md={3} 
-        >
-              <ProductCard
-              key={product.id}
-                title={product.title}
-                src={product.image}
-                description={product.description}
-                price={product.price}
-              />
+        </Col>
 
-              <Col className="text-center" md={12}>
-                  <Button className="w-50 mt-4"variant="primary" onClick={() => addBasket(product)}>Add Basket</Button>
-              </Col>
+        {favorites.map((product) => (
+          <Col sm={12} md={3}>
+            <ProductCard
+              key={product.id}
+              title={product.title}
+              src={product.image}
+              description={product.description}
+              category={product.category}
+              price={product.price}
+            />
+
+            <Col className="text-center" md={12}>
+              <Button
+                className="w-50 mt-4"
+                variant="primary"
+                onClick={() => addBasket(product)}
+              >
+                Add Basket
+              </Button>
+            </Col>
           </Col>
         ))}
-       </Row>
+      </Row>
     </Container>
   );
 }
